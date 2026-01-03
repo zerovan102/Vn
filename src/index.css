@@ -1,0 +1,178 @@
+/* ===== BAGIAN PENTING YANG WAJIB ADA DI ATAS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* ============================================= */
+
+
+/* Kustomisasi & Kelas Tambahan */
+@layer base {
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-bold text-slate-100; /* Diubah menjadi terang untuk tema gelap */
+    }
+    body {
+       @apply bg-slate-900 text-slate-300; /* Warna latar belakang dan teks default untuk tema gelap */
+    }
+}
+
+@layer components {
+    /* Tombol Kustom */
+    .btn-primary {
+        @apply bg-cyan-500 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 ease-in-out;
+        @apply hover:bg-cyan-600 hover:shadow-lg transform hover:-translate-y-0.5;
+        @apply text-center; /* Pastikan teks di tengah */
+    }
+    
+    .btn-secondary {
+        @apply bg-transparent text-white font-semibold py-3 px-6 rounded-lg border-2 border-white transition-all duration-300 ease-in-out;
+        @apply hover:bg-white hover:text-slate-800;
+        @apply text-center; /* Pastikan teks di tengah */
+    }
+
+    .btn-primary.btn-sm {
+        @apply py-2 px-4 text-sm;
+    }
+
+    /* Link Navigasi */
+    .nav-link {
+        @apply text-slate-600 font-semibold text-lg md:text-base py-2 md:py-0;
+        @apply relative after:content-[''] after:bg-cyan-500 after:h-0.5 after:w-0;
+        @apply after:absolute after:left-0 after:-bottom-1;
+        @apply after:transition-all after:duration-300;
+        @apply hover:after:w-full hover:text-cyan-500;
+        @apply md:text-center; /* Tengahkan teks di mobile */
+    }
+    
+    /* Nav-link Aktif (BARU, dari JS) */
+    .nav-link.active {
+        @apply text-cyan-500 after:w-full;
+    }
+
+    /* Input Form Kontak */
+    .form-input {
+        @apply w-full px-4 py-3 bg-slate-800 text-slate-200 border border-slate-600 rounded-lg;
+        @apply focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500;
+        @apply transition-colors duration-200;
+    }
+
+    /* Link Media Sosial */
+    .social-link {
+        @apply text-slate-400 text-3xl transition-all duration-300;
+        @apply hover:text-cyan-400 transform hover:-translate-y-1;
+    }
+
+    /* Card Kustom untuk Portofolio */
+    .portfolio-item {
+        @apply bg-slate-800 rounded-lg shadow-md border border-slate-700 text-left overflow-hidden;
+        @apply transform transition-all duration-300;
+        @apply hover:scale-105 hover:shadow-lg hover:z-10;
+    }
+
+    /* Card Kustom untuk Sertifikat */
+    .certificate-item {
+    @apply bg-slate-800 rounded-lg shadow-md border border-slate-700 text-left overflow-hidden;
+    @apply transform transition-all duration-300;
+    @apply hover:scale-105 hover:shadow-lg hover:z-10;
+    }
+
+    /* ===== STYLE UNTUK MARQUEE SKILL (BARU) ===== */
+    .skill-item-marquee {
+        @apply flex items-center gap-3 text-2xl font-semibold text-slate-600;
+        @apply flex-shrink-0; /* Mencegah item menyusut */
+    }
+    .skill-item-marquee i {
+        @apply text-4xl text-cyan-500;
+    }
+    .scroller-container {
+        /* Efek fade di tepi kanan dan kiri */
+        -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+    }
+    .scroller__inner {
+        @apply flex gap-16 py-4; /* Memberi jarak antar <ul> */
+        animation: scroll 30s linear infinite;
+    }
+    /* ========================================== */
+
+    
+    /* ===== GRADASI BACKGROUND (LEBIH CERAH) ===== */
+    .animated-gradient-bg {
+      /* slate-600: #475569, slate-500: #64748b */
+      background: linear-gradient(45deg, #475569, #64748b, #475569);
+      background-size: 200% 200%;
+      animation: gradient-shift 15s ease infinite;
+    }
+    .animated-gradient-bg-dark {
+      /* slate-700: #334155, slate-600: #475569 */
+      background: linear-gradient(45deg, #334155, #475569, #334155);
+      background-size: 200% 200%;
+      animation: gradient-shift 15s ease infinite;
+    }
+    /* ============================================ */
+
+    /* ===== STYLE UNTUK HEADER SAAT SCROLL (BARU) ===== */
+    #header.scrolled {
+        @apply shadow-lg; /* Tambahkan bayangan yang lebih kuat saat di-scroll */
+    }
+    /* =============================================== */
+}
+
+/* --- KELAS UNTUK ANIMASI SCROLL (EFEK UNBLUR BARU) --- */
+@layer utilities {
+    .fade-in-element {
+        opacity: 0;
+        /* DIUBAH: Tambahkan blur dan scale */
+        filter: blur(5px) scale(0.95);
+        transform: translateY(20px);
+        transition: opacity 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), 
+                    transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1),
+                    filter 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+    
+    .fade-in-visible {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0) scale(1); /* Kembali normal */
+    }
+    
+    /* Utility untuk delay animasi */
+    .delay-100 { transition-delay: 0.1s; }
+    .delay-200 { transition-delay: 0.2s; }
+    .delay-300 { transition-delay: 0.3s; }
+    .delay-400 { transition-delay: 0.4s; }
+    .delay-500 { transition-delay: 0.5s; }
+    .delay-600 { transition-delay: 0.6s; }
+    .delay-700 { transition-delay: 0.7s; }
+    .delay-800 { transition-delay: 0.8s; }
+    .delay-900 { transition-delay: 0.9s; }
+    .delay-1000 { transition-delay: 1s; }
+
+    /* ===== KELAS UNTUK KURSOR MENGETIK ===== */
+    .typed-cursor {
+      animation: blink-cursor 0.7s infinite;
+    }
+    .typed-cursor.typing {
+      animation: none; /* Berhenti berkedip saat sedang mengetik */
+    }
+}
+
+/* ===== KEYFRAMES UNTUK ANIMASI ===== */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes blink-cursor {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Keyframe untuk marquee skill */
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
